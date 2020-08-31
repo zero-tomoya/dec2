@@ -1,3 +1,19 @@
 # dec2
 
-このリポジトリにはdec2.exeの公開可能部分のソースや実行可能バイナリが含まれます。
+このリポジトリにはdec2.exeのソースや実行可能バイナリが保管されています。
+
+download
+
+***
+
+[Linux](./dist/linux/dec2) 
+
+****
+
+[windows](./dist/linux/dec2.exe)
+
+******
+
+LICENSE
+
+GPL ライセンス
