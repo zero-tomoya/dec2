@@ -1,5 +1,5 @@
 
-import xcode
+import hashlib
 import pyminizip
 import os
 import time,sys
@@ -29,7 +29,9 @@ def pyzip(file):
             continue
         elif plaintext==plaintext2:
             break
-    pass2=xcode.xencode(plaintext)
+    key=plaintext
+    pass2=str(key)
+    pass2=hashlib.sha256(pass2.encode()).hexdigest()
     print('')
     if file=="":
         filename=input(' 圧縮対象ファイル名 >> ')
@@ -88,7 +90,10 @@ def pyzip(file):
 def openzip(file,chef):
     #print('')
     pass3=getpass.getpass(prompt=' パスワード (英数字)>> ')
-    pass2=xcode.xdecode(pass3)
+    key=pass3
+    pass2=str(key)
+    pass2=hashlib.sha256(pass2.encode()).hexdigest()
+    pass2=bytes(pass2,encoding = "utf-8")
     if file=="":
         filename=input(' 展開ファイル名 >> ')
     else:
