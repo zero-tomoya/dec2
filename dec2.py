@@ -51,6 +51,12 @@ def pyzip(file):
         return
     sf=os.path.dirname(filename)
     sf=sf+"/"
+    cdir=os.path.isdir(sf)
+    if cdir!=True:
+        print(' ディレクトリの存在が確認できませんでした')
+        print('')
+        input(' メニュー画面に戻るにはエンターキーを押してください')
+        return
     basename_without_ext = os.path.splitext(os.path.basename(filename))[0]
     basename_without_ext=basename_without_ext+".dec"
     basefiles=os.path.basename(filename) 
@@ -64,7 +70,6 @@ def pyzip(file):
     try :
         # 圧縮関係(英数字以外のファイル名もちゃんと圧縮できる)
         pyminizip.compress(basefiles.encode('cp932'),"\\".encode('cp932'),basename_without_ext.encode('cp932'),pass2,int(9))
-        print(' 警告 :このソフトで圧縮したファイルはWindows標準機能でパスワードを入力して展開することはできません。')
         print('')
         print(' 圧縮中　しばらくお待ちください。(ファイルサイズによっては時間がかかる場合があります)')
     except PermissionError:
@@ -93,6 +98,13 @@ def openzip(file,chef):
     filename = filename.strip()
     sf=os.path.dirname(filename)
     sf=sf+'/'
+    cdir=os.path.isdir(sf)
+    if cdir!=True:
+        print(' ディレクトリの存在が確認できませんでした')
+        print('')
+        input(' メニュー画面に戻るにはエンターキーを押してください')
+        return
+    
     ext = os.path.splitext(filename)[1]
     name=os.path.splitext(os.path.basename(filename))[0]
     ext=str(ext)
