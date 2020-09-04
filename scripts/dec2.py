@@ -10,12 +10,28 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 warnings.simplefilter('ignore')
 chef=1
 sys1=1
-def cc(filesiz):
-    return
 
+def cc(B):
+   'Return the given bytes as a human friendly KB, MB, GB, or TB string'
+   B = float(B)
+   KB = float(1024)
+   MB = float(KB ** 2) # 1,048,576
+   GB = float(KB ** 3) # 1,073,741,824
+   TB = float(KB ** 4) # 1,099,511,627,776
+
+   if B < KB:
+      return '{0} {1}'.format(B,'Bytes' if 0 == B > 1 else 'Byte')
+   if KB <= B < MB:
+      return '{0:.2f} KB'.format(B/KB)
+   if MB <= B < GB:
+      return '{0:.2f} MB'.format(B/MB)
+   if GB <= B < TB:
+      return '{0:.2f} GB'.format(B/GB)
+   if TB <= B:
+      return '{0:.2f} TB'.format(B/TB)
 # zipファイルの圧縮
 
-def pyzip(file):
+def comzip(file):
     while True:
         #print('')
         plaintext=getpass.getpass(prompt=' パスワード (英数字)>> ')
@@ -75,7 +91,7 @@ def pyzip(file):
         pyminizip.compress(basefiles.encode('cp932'),"\\".encode('cp932'),basename_without_ext.encode('cp932'),pass2,int(9))
         print('')
         print(' 圧縮中　しばらくお待ちください。(ファイルサイズによっては時間がかかる場合があります)')
-        print('合計ファイルサイズ:"+str(cc(os.path.getsize(filename)))
+        print(" 合計ファイルサイズ:"+str(cc(os.path.getsize(filename))))
     except PermissionError:
         print(' エラー :アクセスが拒否されたため圧縮ファイルを作成できませんでした。')
         print('')
@@ -86,8 +102,6 @@ def pyzip(file):
     time.sleep(5)
 
 # ファイルの展開
-
-# 英数字以外のファイル名は文字化けする
 
 def openzip(file,chef):
     #print('')
@@ -110,8 +124,7 @@ def openzip(file,chef):
         print(' ディレクトリの存在が確認できませんでした')
         print('')
         input(' メニュー画面に戻るにはエンターキーを押してください')
-        return
-    
+        return   
     ext = os.path.splitext(filename)[1]
     name=os.path.splitext(os.path.basename(filename))[0]
     ext=str(ext)
@@ -131,7 +144,6 @@ def openzip(file,chef):
         input(' メニュー画面に戻るにはエンターキーを押してください')
         return
     os.chdir(sf)
-    
     if ext!=".dec":
         print(' 対応していないファイル形式です。')
         print('')
@@ -149,7 +161,7 @@ def openzip(file,chef):
             k="y"
         if k=="Y" or k=="YES" or k=="y":
             print(' 展開中　しばらくお待ちください。(ファイルサイズによっては時間がかかる場合があります)')
-            print('合計ファイルサイズ:"+str(cc(os.path.getsize(name)))
+            print(" 合計ファイルサイズ:"+str(cc(os.path.getsize(name))))
             zipfilepointer=zipfilejpn.ZipFile(name,"r")# ここから展開関係
             zipfilepointer.extractall(sf,pwd=bytes(pass2))
             zipfilepointer.close() # 展開関係ここで終わり
@@ -174,7 +186,6 @@ def openzip(file,chef):
         print('')
         print(' 出力先フォルダ: '+sf)
         time.sleep(5)
-# メニュー表示
 
 # メニュー表示
 c=-1
@@ -195,7 +206,7 @@ if sys1==1:
             openzip(file,chef)
             file=""
         elif ext!=".zip" or ext!="dec":
-            pyzip(file)
+            comzip(file)
             file=""
     else:
         file=""
@@ -221,10 +232,9 @@ while True:
             c=int(c)
         except ValueError:
             pass
-    #os.system('cls')
     if c==0:
         file=""
-        pyzip(file)
+        comzip(file)
         continue
     if c==1:
         file=""
