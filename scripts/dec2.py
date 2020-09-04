@@ -10,7 +10,8 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 warnings.simplefilter('ignore')
 chef=1
 sys1=1
-
+def cc(filesiz):
+    return
 
 # zipファイルの圧縮
 
@@ -74,6 +75,7 @@ def pyzip(file):
         pyminizip.compress(basefiles.encode('cp932'),"\\".encode('cp932'),basename_without_ext.encode('cp932'),pass2,int(9))
         print('')
         print(' 圧縮中　しばらくお待ちください。(ファイルサイズによっては時間がかかる場合があります)')
+        print('合計ファイルサイズ:"+str(cc(os.path.getsize(filename)))
     except PermissionError:
         print(' エラー :アクセスが拒否されたため圧縮ファイルを作成できませんでした。')
         print('')
@@ -147,6 +149,7 @@ def openzip(file,chef):
             k="y"
         if k=="Y" or k=="YES" or k=="y":
             print(' 展開中　しばらくお待ちください。(ファイルサイズによっては時間がかかる場合があります)')
+            print('合計ファイルサイズ:"+str(cc(os.path.getsize(name)))
             zipfilepointer=zipfilejpn.ZipFile(name,"r")# ここから展開関係
             zipfilepointer.extractall(sf,pwd=bytes(pass2))
             zipfilepointer.close() # 展開関係ここで終わり
