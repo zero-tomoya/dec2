@@ -7,11 +7,11 @@ download
 
 ***
 
-[Linux](./dist/linux/dec2) 
+[Linux](./bin/linux/dec2) 
 
 ****
 
-[windows](./dist/windows/dec2.exe)
+[windows](./bin/windows/dec2.exe)
 
 ******
 
