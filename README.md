@@ -11,7 +11,7 @@ download
 
 ****
 
-[windows](./bin/windows/dec2.exe)
+[windows(installer)](./bin/windows/dec2.exe)
 
 ******
 
